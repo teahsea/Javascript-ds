@@ -46,3 +46,57 @@ const staticArray = new Array(5); // Creating a static array of length 5
 const dynamicArray = ['a', 'b', 'c']; // Creating a dynamic array with initial elements
 dynamicArray.push('d'); // Adding an element to the dynamic array
 console.log(dynamicArray); // Output: ['a', 'b', 'c', 'd']
+
+
+// build an array
+class MyArray {
+    constructor() {
+        this.length = 0;
+        this.data = {}
+    }
+
+    get(index) {
+        return this.data[index];
+    }
+
+    add(value) {
+        this.data[this.length] = value;
+        this.length++;
+    }
+
+    pop() {
+        const deleted = this.data[this.length - 1];
+
+        delete this.data[this.length - 1];
+
+        this.length --;
+
+        return `Item ${deleted} deleted!`;
+    }
+
+    delete(index) {
+        const deleted = this.data[index];
+        this.shiftItems(index);
+
+        return `Item ${deleted} deleted!`;
+    }
+
+    shiftItems(index) {
+        for(let i = index; i < this.length - 1; i++) {
+            this.data[i] = this.data[i + 1];
+        }
+        this.pop();
+    }
+}
+
+const newArr = new MyArray();
+newArr.add("a");
+newArr.add("b");
+newArr.add("c");
+newArr.add("d");
+
+console.log(newArr);
+
+newArr.delete(2);
+
+console.log(newArr);
